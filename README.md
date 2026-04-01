@@ -1,6 +1,6 @@
 # INF653 Midterm Project - Quotes REST API
 
-**Author:** [Your Name]
+**Author:** Andrew Carter
 
 ## Description
 A PHP OOP REST API for managing quotations. Supports full CRUD operations for quotes, authors, and categories.

@@ -14,18 +14,6 @@ ENV APACHE_DOCUMENT_ROOT /var/www/html
 # Allow .htaccess overrides
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
-# Add CORS headers at the Apache level
-RUN echo '<IfModule mod_headers.c>\n\
-    Header always set Access-Control-Allow-Origin "*"\n\
-    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"\n\
-    Header always set Access-Control-Allow-Headers "Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With"\n\
-</IfModule>\n\
-\n\
-RewriteEngine On\n\
-RewriteCond %{REQUEST_METHOD} OPTIONS\n\
-RewriteRule ^(.*)$ $1 [R=200,L]\n' > /etc/apache2/conf-available/cors.conf \
-    && a2enconf cors
-
 # Copy project files
 COPY . /var/www/html/
 
